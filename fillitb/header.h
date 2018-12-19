@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:39:54 by plaurent          #+#    #+#             */
-/*   Updated: 2018/11/29 12:45:46 by plaurent         ###   ########.fr       */
+/*   Updated: 2018/12/19 10:06:08 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+int		ft_putnbr(int i);
 int		get_next_line(const int fd, char **line);
 void		ft_putendl(char const *s);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -30,4 +31,6 @@ void		ft_putchar(char c);
 void		ft_putstr(char const *str);
 char		*ft_strcat2(char *dest, const char *src);
 int		ft_checknb(char *str);
+int		ft_checktetri(char *str);
+int		ft_checkodbg(char *str, int i);
 #endif

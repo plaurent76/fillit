@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2018/11/26 22:43:39 by plaurent         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:57:23 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,22 @@ int	main(int argc, char **argv)
 	str[0] = ft_strnew(21);
 	while (get_next_line(fd, &line) == 1)
 	{
+		ft_putstr(line);
 		str[i] = ft_strcat2(str[i], line);
 		free(line);
 		if (n == 4)
 		{
-			str[i][20] = '\0';
 			n = 0;
-			if (ft_checknb(str[i]) == 2)
+			str[i][21] = '\0';
+			if (ft_checknb(str[i]) == 20)
 			{
 				ft_putstr("nb de caractere non conforme");
+				return (0);
+			}
+			if (ft_checktetri(str[i]) == 2)
+			{
+				ft_putstr("tetri non conforme num:");
+				ft_putnbr(i);
 				return (0);
 			}
 			i++;
