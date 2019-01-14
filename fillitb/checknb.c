@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checknb.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/14 14:05:29 by eviana            #+#    #+#             */
+/*   Updated: 2019/01/14 14:28:14 by eviana           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 int	ft_checknb(char	*str)
@@ -13,11 +25,11 @@ int	ft_checknb(char	*str)
 	{
 		if (str[i] == '#')
 			nb++;
-		if (str[i] == ',' || str[i] == '#')
+		if (str[i] == '.' || str[i] == '#')
 			k++;
 		i++;
 	}
-	if (nb == 4 && k == 16)
+	if (nb == 4 && k == 16 && i == 16)
 		return (1);//bon
 	return (2);//mauvais
 }
@@ -32,14 +44,14 @@ int	ft_checktetri(char *str)
 	while (str[++i] != '\0')
 	{
 		if (str[i] == '#')
-			n = n + ft_checkodbg(str, i);//n = nb de fois que chaque piece ce touche
+			n = n + ft_checkplace(str, i);//n = nb de fois que chaque piece se touche
 	}
 	if (n < 6)
 		return (2);//mauvais
 	return (1);//bon
 }
 
-int	ft_checkodbg(char *str, int i)
+int	ft_checkplace(char *str, int i)
 {
 	int	k;
 

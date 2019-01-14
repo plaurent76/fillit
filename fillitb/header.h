@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:39:54 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/14 13:06:39 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/14 14:26:36 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void		ft_putstr(char const *str);
 char		*ft_strcat2(char *dest, const char *src);
 int		ft_checknb(char *str);
 int		ft_checktetri(char *str);
-int		ft_checkodbg(char *str, int i);
+int		ft_checkplace(char *str, int i);
 #endif
