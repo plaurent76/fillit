@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:39:54 by plaurent          #+#    #+#             */
-/*   Updated: 2018/12/19 10:06:08 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:06:39 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdlib.h>
 
 int		ft_putnbr(int i);
 int		get_next_line(const int fd, char **line);

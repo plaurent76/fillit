@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/14 12:56:53 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/14 13:06:29 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
-	char	**str;/*tableau de stockage des tetri*/
+	char	**str;//tableau de stockage des tetri
 	int	n;
 	int	i;
 
