@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/14 12:56:53 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:15:35 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 		fd = open(argv[1], O_RDONLY);//ouverture du fichier de lecture
 	else
 		return (2);
-	str[0] = ft_strnew(16);//pour avoir une string de la tailles d'un tetri + les '.' qui vont avec lui
+	str[0] = ft_strnew(17);//pour avoir une string de la tailles d'un tetri + les '.' qui vont avec lui
 	while (get_next_line(fd, &line) == 1)//tant que la lecture n'est pas finie
 	{
 		//ft_putstr(line);
@@ -38,7 +38,8 @@ int	main(int argc, char **argv)
 		if (n == 4)//si on arrive a la lectur de la 4e et derniere ligne d'un tetri
 		{
 			n = 0;
-			str[i][16] = '\0';
+			str[i][16] = 'A' + i;
+			str[i][17] = '\0';
 			if (ft_checknb(str[i]) == 2)//check du bon nb de '#' et de '.'
 			{
 				ft_putstr("nb de caractere non conforme");
@@ -50,12 +51,15 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 			i++;// numero du tetri
-			str[i] = ft_strnew(16);
+			str[i] = ft_strnew(17);
 		}
 		else//si on est pas au dernier tetri alors:
 			n++;
 	}
 	str[i] = NULL;
+	str = solve(str, i);//envoie des tetri verifier et stocker dans un double tableau avec le nb de teti pour la taille du square
+
+
 	i = 0;
 	while (str[i] != '\0')//affichage des tetri apres verif en 1 ligne
 	{
