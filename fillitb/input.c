@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/15 12:15:35 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/16 15:30:33 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	int	n;
 	int	i;
 
-	n = 0;
+	n = 1;
 	i = 0;
 	str = (char **)malloc(sizeof(char *) * (26 + 1));//je malloc pour 26 pieces qui est le max + 1
 	if (argc == 1)
@@ -38,8 +38,8 @@ int	main(int argc, char **argv)
 		if (n == 4)//si on arrive a la lectur de la 4e et derniere ligne d'un tetri
 		{
 			n = 0;
-			str[i][16] = 'A' + i;
-			str[i][17] = '\0';
+			//str[i][16] = 'A' + i;
+			str[i][16] = '\0';
 			if (ft_checknb(str[i]) == 2)//check du bon nb de '#' et de '.'
 			{
 				ft_putstr("nb de caractere non conforme");
@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 			n++;
 	}
 	str[i] = NULL;
-	str = solve(str, i);//envoie des tetri verifier et stocker dans un double tableau avec le nb de teti pour la taille du square
+	//str = solve(str, i);//envoie des tetri verifier et stocker dans un double tableau avec le nb de teti pour la taille du square
 
 
 	i = 0;

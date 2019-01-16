@@ -13,7 +13,7 @@ int	ft_checknb(char	*str)
 	{
 		if (str[i] == '#')
 			nb++;
-		if (str[i] == ',' || str[i] == '#')
+		if (str[i] == '.' || str[i] == '#')
 			k++;
 		i++;
 	}
