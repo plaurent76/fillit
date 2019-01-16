@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:39:54 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/14 14:52:15 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/16 14:04:44 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,18 @@ typedef struct	s_point
 {
 	int x;
 	int y;
-}				t_point
+}				t_point;
 
-typedef struct 	s_list
+typedef struct 	s_tlist
 {
 	t_point			*tab;
 	char			name;
-	struct s_list	*next;
-}				t_list
+	struct s_tlist	*next;
+}				t_tlist;
 
-int			ft_putnbr(int i);
 int			get_next_line(const int fd, char **line);
-void		ft_putendl(char const *s);
-char		*ft_strsub(char const *s, unsigned int start, size_t len);
-char		*ft_strnew(size_t s);
-char		*ft_strcpy(char *dest, const char *src);
-char		*ft_strchr(const char *s, int c);
-int			ft_strlen(char *str);
-void		ft_putchar(char c);
-void		ft_putstr(char const *str);
-char		*ft_strcat2(char *dest, const char *src);
 int			ft_checknb(char *str);
 int			ft_checktetri(char *str);
 int			ft_checkplace(char *str, int i);
+
 #endif

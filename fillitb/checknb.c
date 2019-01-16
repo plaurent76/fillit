@@ -6,11 +6,11 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:05:29 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/14 17:16:28 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/16 13:45:50 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "fillit.h"
 
 int	ft_checknb(char	*str)
 {

@@ -6,11 +6,11 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/14 15:27:29 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/16 13:45:33 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "fillit.h"
 #include <fcntl.h>
 
 static unsigned int	ft_strtest(char *str)
