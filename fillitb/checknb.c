@@ -6,7 +6,7 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:05:29 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/14 14:28:14 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/14 17:16:28 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,22 @@ int	ft_checktetri(char *str)
 
 int	ft_checkplace(char *str, int i)
 {
-	int	k;
+	int	j;
 
-	k = 0;
+	j = 0;
 	if (i > 3)//si on est pas dans la ligne du haut on peut regarder en haut
 		if (str[i - 4] == '#')
-			k++;
+			j++;
 	if (i != 3 && i != 7 && i != 11 && i != 15)//si on estpas dans la ligne de droite on peut regarder a droite
 		if (str[i + 1] == '#')
-			k++;
+			j++;
 	if (i < 12)//si pas en bas
 		if (str[i + 4] == '#')
-			k++;
+			j++;
 	if (i != 0 && i != 4 && i != 8 && i != 12)//si pas a gauche
 		if (str[i - 1] == '#')
-			k++;
-	return (k);
+			j++;
+	return (j);
 }
 
 
