@@ -6,7 +6,7 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:48:07 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/16 15:53:18 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/22 11:39:29 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_point		*ft_IDtetri(char *str)
 	t_point	*tab;
 	int		i;
 	int		j;
+	int		inity;
+	int		initx;
 	
 	i = 0;
 	j = 0;
@@ -45,14 +47,17 @@ t_point		*ft_IDtetri(char *str)
 		{
 			tab[j].x = i % 4;
 			tab[j].y = i / 4;
+			if (j == 0)
+			{
+				initx = tab[0].x;
+				inity = tab[0].y;
+			}
+			tab[j].x = tab[j].x - initx; // POUR METTRE EN HAUT A GAUCHE
+			tab[j].y = tab[j].y - inity; // SAME
 			j++;
 		}
 		i++;
 	}
-	//ft_putnbr(tab[3].x); // TEST
-	//ft_putchar('\n');	 // TEST
-	//ft_putnbr(tab[3].y); // TEST
-	//ft_putchar('\n');    // TEST
 
 	tab[j].x = 5; // Pour signifier la fin ?? scotch
 	return (tab);
@@ -75,33 +80,37 @@ t_tlist	*ft_createtetri(t_point *tab, int tetrinb)
 		ft_memcpy(tetri->tab, tab, (sizeof(t_point) * 5)); // ??? sizeof ???
 		tetri->name = (char)tetrinb + 'A';
 	}
-	else
+	else // usefull ?
 	{
 		tetri->tab = NULL;
 		tetri->name = 0;
 	}
 	tetri->next = NULL;
+	// FREE QQUCHOSE ?
 	return (tetri);
 }
 
 t_tlist		*ft_newtetri(t_tlist *tetrilist, char *str, int tetrinb)
 {
 	t_tlist	*tetri;
-	t_tlist	*list;
-	t_point	*tab;
+	t_tlist	*templist; // free ?
+	t_point	*tab; 
 
 	tab = ft_IDtetri(str);
 	tetri = ft_createtetri(tab, tetrinb);
+	free(tab);
+	tab = NULL;
 	
-	// Maillage du dernier maillon avec la chaine
+	// Maillage du nouveau maillon a la fin de la chaine
 	if (tetrilist == NULL)
+		// free tetrilist ?
 		return (tetri);
 	else
 	{
-		list = tetrilist;
-		while (list->next != NULL)
-			list = list->next;
-		list->next = tetri;
+		templist = tetrilist; // NEED TEMP ?
+		while (templist->next != NULL)
+			templist = templist->next;
+		templist->next = tetri;
 		return (tetrilist);
 	}
 }
@@ -114,11 +123,11 @@ void	ft_print(t_tlist *tetrilist)
 	int		x;
 	int		y;
 	
-	i = 0;
 	while (tetrilist)
 	{
 		tab = tetrilist->tab;
-		while (tab[i].x != 5) // scotch
+		i = 0;
+		while (tab[i].x != 5) // scotch ou mettre i < 4
 		{
 			y = 0;
 			while (y < 4)
@@ -161,7 +170,8 @@ int		main(int argc, char **argv)
 		ft_putstr("usage: only one argument needed");
 		return (0);
 	}
-	fd = open(argv[1], O_RDONLY);
+	if	((fd = open(argv[1], O_RDONLY)) == -1)
+		return (0);
 	if (!(str = ft_strnew(16)))
 		return (0);
 	while (get_next_line(fd, &line) == 1)
