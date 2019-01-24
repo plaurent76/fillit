@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 11:19:42 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/16 16:02:45 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/22 13:26:16 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,22 @@ void	mainsolve(char **str, int nt)
 	tab = solve(tab, str, t);
 */
 
-char	*place(char *tab, int k)
+char	*place(char *tab, int k, int n)
 {
 	char	x;
+
 	if (k < 6)
 	{
-		x = tab[k];
-		tab[k] = tab[k + 1];
-		tab[k + 1] = x;
+		x = tab[k + n];
+		tab[k] = tab[k + 1 + n];
+		tab[k + 1 + n] = x;
 	}
-	if (k == 6)
+	if (k == (6 - n))
 	{
-		x = tab[k];
-		tab[5]
+		x = tab[0];
+		tab[0] = tab[5];
+		tab[5] = x;
+	}
 	return (tab);
 }
 
@@ -74,14 +77,15 @@ int		main()
 		while (tab[++i] != '\0')
 			ft_putchar(tab[i]);
 		if (k < (5 - n))
-			place(tab, k++);
+			place(tab, k++, n);
 		else
 		{
 			if (n == 0)
 			{
-				place(tab, 6);
+				place(tab, 6, n);
 			}
-			n++
+			if (n >= 6 - n)
+				n = 0;
 			k = 0;
 			ft_putchar('\n');
 		}
