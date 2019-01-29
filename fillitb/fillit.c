@@ -6,7 +6,7 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:48:07 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/29 11:09:43 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/29 12:03:36 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ t_point		*ft_IDtetri(char *str)
 				initx = tab[0].x;
 				inity = tab[0].y;
 			}
-			tab[j].x = tab[j].x - initx; // POUR METTRE EN HAUT A GAUCHE
-			tab[j].y = tab[j].y - inity; // SAME
+			tab[j].x = tab[j].x - initx;
+			tab[j].y = tab[j].y - inity;
 			j++;
 		}
 		i++;
@@ -73,7 +73,7 @@ t_point		*ft_IDtetri(char *str)
 			}	
 		}
 	}
-	tab[j].x = 5; // Pour signifier la fin ?? scotch
+	//tab[4] = 0; // Pour signifier la fin ?? scotch
 	return (tab);
 }
 
@@ -198,28 +198,30 @@ int		ft_checkplacetetri(char **board, t_tlist *tetri)
 }
 
 // essai backtracking
-char	**ft_backtrack(t_tlist *tetri, char **board, int size) // pas oblige de return un char **
+char	**ft_backtrack(t_tlist *tetri, char **board, int size)
 {
 	int 	i;
+	int		x;
+	int		y;
 	t_point *tab;
 
 	i = 0;
 	tab = tetri->tab;
-	while ((tetri != NULL) && i <= ((size * size) - 4)) // tant qu'on n'a pas atteint la fin des tetris // tant qu'on ne depasse pas du board au debut du placement // if au lieu de while ?
+	while ((tetri != NULL) && i <= ((size * size) - 3))
 	{
-		while (i <= ((size * size) - 4)) //&& // tant qu'on ne depasse pas du board au debut
-					//board[(i / size) + tetri->next->tab[0].y][(i % size) + // et piece suivante pas placee
-					//tetri->next->tab[0].x] != tetri->next->name)
+		while (i <= ((size * size) - 3))
 		{
 			// ft_putstr("A : je tente de positionner\n"); // TEST TEST TEST
-			if (ft_checkboard1(tab, i, size) == 1 &&  // si aucun element du tetri ne depasse
-					ft_checkboard2(board, tab, i, size) == 1) // et si place libre
+			if (ft_checkboard1(tab, i, size) == 1 &&
+					ft_checkboard2(board, tab, i, size) == 1)
 			{
 				// ft_putstr("D : je positionne \n"); // TEST TEST TEST
-				board[(i / size) + tab[0].y][(i % size) + tab[0].x] = tetri->name;
-				board[(i / size) + tab[1].y][(i % size) + tab[1].x] = tetri->name;
-				board[(i / size) + tab[2].y][(i % size) + tab[2].x] = tetri->name;
-				board[(i / size) + tab[3].y][(i % size) + tab[3].x] = tetri->name;
+				y = i / size;
+				x = i % size;
+				board[y + tab[0].y][x + tab[0].x] = tetri->name;
+				board[y + tab[1].y][x + tab[1].x] = tetri->name;
+				board[y + tab[2].y][x + tab[2].x] = tetri->name;
+				board[y + tab[3].y][x + tab[3].x] = tetri->name;
 				// ft_printboard(board); // TEST TEST TEST
 				if (tetri->next)
 					board = ft_backtrack(tetri->next, board, size);
@@ -233,58 +235,23 @@ char	**ft_backtrack(t_tlist *tetri, char **board, int size) // pas oblige de ret
 				   	(tetri->next != NULL && ft_checkplacetetri(board, tetri->next)))
 				break;
 		if (tetri->next != NULL && ft_checkplacetetri(board, tetri)) 
-			//&& // si on est pas au dernier et que le suivant n'est pas place : on clean
-				//board[(i / size) + tetri->next->tab[0].y][(i % size) + 
-				//tetri->next->tab[0].x] != tetri->next->name)
 		{	
 			// ft_putstr("je clean\n"); // TEST TEST TEST
-			board[(i / size) + tab[0].y][(i % size) + tab[0].x] = '.';
-			board[(i / size) + tab[1].y][(i % size) + tab[1].x] = '.';
-			board[(i / size) + tab[2].y][(i % size) + tab[2].x] = '.';
-			board[(i / size) + tab[3].y][(i % size) + tab[3].x] = '.';
+			y = i / size;
+			x = i % size;
+			board[y + tab[0].y][x + tab[0].x] = '.';
+			board[y + tab[1].y][x + tab[1].x] = '.';
+			board[y + tab[2].y][x + tab[2].x] = '.';
+			board[y + tab[3].y][x + tab[3].x] = '.';
 			// ft_putstr("c'est clean\n"); // TEST TEST TEST
-			// ft_printboard(board);
+			// ft_printboard(board); // TEST TEST TEST
 		}
-		i++; // useless avec un if a la place du while
+		i++;
 	}
-	return (board); // verif qu'on a un board qui marche ou augmenter size de 1
+	return (board);
 }
 
-/*
-	// tentative 1
-	while (ft_checkboard(board, tab, i, size) == 1) // bon ??? tant que dep pas
-	{
-		while (ft_checkboard(board, tab, i, size) == 1) // tant que depasse pas
-		{
-			while (ft_checkboard(board, tab, i, 0) == 1) // tant que place libre
-			{
-				board[(i / 4) + tab[0].y][(i % 4) + tab[0].x] = tetri->name;
-				board[(i / 4) + tab[1].y][(i % 4) + tab[1].x] = tetri->name;
-				board[(i / 4) + tab[2].y][(i % 4) + tab[2].x] = tetri->name;
-				board[(i / 4) + tab[3].y][(i % 4) + tab[3].x] = tetri->name;
-				if (tetri->next != NULL)
-					board = ft_backtrack(tetri->next, board, size);
-				else
-					return (board);
-			}
-				
-			board[(i / 4) + tab[0].y][(i % 4) + tab[0].x] = '.';
-			board[(i / 4) + tab[1].y][(i % 4) + tab[1].x] = '.';
-			board[(i / 4) + tab[2].y][(i % 4) + tab[2].x] = '.';
-			board[(i / 4) + tab[3].y][(i % 4) + tab[3].x] = '.';
-
-
-			i++; // A FINIR
-		}
-		i++; // au cas ou depasse a droite : revenir au i/case suivant(e)
-		// ATTENTION BOUCLE INFINIE SI DEPASSE CADRE CONTINUELLEMENT
-	}
-	// if (tetri->next != NULL)
-	//	ft_backtrack(tetri->next, board, size);
-	return (board);
-}*/
-
-int		ft_nearsqrt(int nb) // A REFAIRE sort un board de 7 pour 9 piece
+int		ft_nearsqrt(int nb)
 {
 	int i;
 
@@ -304,7 +271,7 @@ char	**ft_createboard(int size)
 
 	y = 0;
 	if (!(board = (char**)malloc(sizeof(char*) * (size + 1))))
-		return (NULL); // verif output ok
+		return (NULL);
 	while (y < size)
 	{
 		x = 0;
@@ -319,10 +286,6 @@ char	**ft_createboard(int size)
 		y++;
 	}
 	board[y] = NULL;
-
-	// print le board vide
-	// ft_printboard(board);
-
 	return (board);
 }
 
@@ -332,19 +295,11 @@ char	**ft_tetriplace(t_tlist *tetrilist, int	tetrinb)
 	char 	**board;
 	int		size;
 
-	// initialise le board
-	// ft_putnbr(tetrinb); // TEST TEST TEST
-	// ft_putchar('\n'); // TEST TEST TEST
-	size = ft_nearsqrt(tetrinb * 4); // attention erreur si envoie 1 seule barre // A OPTIMISER
-	// ft_putnbr(size); // TEST TEST TEST
-	// ft_putchar('\n'); // TEST TEST TEST
-	
-	// lance le backtracking
+	size = ft_nearsqrt(tetrinb * 4);
 	board = ft_createboard(size);
 	board = ft_backtrack(tetrilist, board, size);
 	while (!ft_checkplacetetri(board, tetrilist))
 	{
-		// ft_putstr("_________________ JE LANCE AVEC UN SIZE + 1 ___________________\n");
 		free(board);
 		size++;
 		board = ft_createboard(size);
@@ -365,7 +320,7 @@ void	ft_print(t_tlist *tetrilist)
 	{
 		tab = tetrilist->tab;
 		i = 0;
-		while (tab[i].x != 5) // scotch ou mettre i < 4
+		while (i < 4) // here was the scotch
 		{
 			y = 0;
 			while (y < 4)
@@ -376,7 +331,7 @@ void	ft_print(t_tlist *tetrilist)
 					if (x == tab[i].x && y == tab[i].y)
 					{
 						ft_putchar(tetrilist->name);
-						i++; // bonne place ?
+						i++;
 					}
 					else
 						ft_putchar('.');
@@ -397,8 +352,8 @@ int		main(int argc, char **argv)
 	char	*line;
 	char	*str;
 	t_tlist	*tetrilist;
-	int		linenb; // compteur de ligne par tetri
-	int		tetrinb; // compteur de tetri
+	int		linenb;
+	int		tetrinb;
 
 	linenb = 1;
 	tetrinb = 0;
@@ -429,13 +384,13 @@ int		main(int argc, char **argv)
 				free(str);
 				return (0);
 			}
-			bzero(str, 16); // modif directement a l'adresse
+			bzero(str, 16);
 			tetrinb++;
 		}
 		else
 			linenb++;
 	}
-	// ft_print(tetrilist);
+	// ft_print(tetrilist); // TEST TEST TEST
 	ft_printboard(ft_tetriplace(tetrilist, tetrinb));
 	free(str);
 	return (0);

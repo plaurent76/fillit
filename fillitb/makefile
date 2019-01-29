@@ -2,13 +2,13 @@ NAME = fillit
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c get_next.c checknb.c\
+SRC = fillit2.c get_next.c checknb.c\
 
 HEADER = fillit.h
 
 LIBFT = libft/libft.a
 
-OBJ = main.o get_next.o checknb.o\
+OBJ = fillit2.o get_next.o checknb.o\
 
 all: $(NAME)
 
