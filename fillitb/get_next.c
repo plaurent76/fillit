@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/29 15:05:44 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/31 16:46:57 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int					get_next_line(int const fd, char **line)
 	if (!(str[fd]) && (str[fd] = ft_strnew(0)) == NULL)
 		return (-1);
 	while (!(ft_strchr(str[fd], '\n')) &&
-	(res = read(fd, buff, BUFF_SIZE)) > 0)
+			(res = read(fd, buff, BUFF_SIZE)) > 0)
 	{
 		buff[res] = '\0';
 		ptr = str[fd];
@@ -78,4 +78,36 @@ int					get_next_line(int const fd, char **line)
 	if (ft_howcpy(str[fd]) == NULL)
 		return (0);
 	return (1);
+}
+
+int		main(int argc, char **argv)
+{
+	int		fd;
+	int		fd2;
+	char	*line;
+
+	if (argc == 1)
+		fd = 0;
+	else if (argc == 3)
+	{
+		fd = open(argv[1], O_RDONLY);
+		fd2 = open(argv[2], O_RDONLY);
+	}
+	else
+		return (2);
+	while (get_next_line(fd, &line) == 1)
+	{
+		ft_putnbr(fd);
+		ft_putendl(line);
+		ft_putchar('a');
+		free(line);
+	}
+	while (get_next_line(fd2, &line) == 1)
+	{
+		ft_putendl(line);
+		free(line);
+	}
+	if (argc == 3)
+		close(fd);
+	return (0);
 }
