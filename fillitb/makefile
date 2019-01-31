@@ -2,22 +2,22 @@ NAME = fillit
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = fillit2.c get_next.c checknb.c\
+SRC = fillit2.c get_next.c checknb.c
 
 HEADER = fillit.h
 
 LIBFT = libft/libft.a
 
-OBJ = fillit2.o get_next.o checknb.o\
+OBJ = fillit2.o get_next.o checknb.o
 
-all: $(NAME)
+all:		$(NAME)
 
-$(NAME):
-	gcc -o $(NAME) $(CFLAGS) $(SRC) $(LIBFT)
+$(NAME):	$(OBJ)
+	gcc -o $(NAME)  $(CFLAGS) $(OBJ) $(LIBFT) -I $(HEADER)
 
 clean:
-	/bin/rm -f $(OBJ)
-
+	/bin/rm -f $(OBJ) *.a
+.PHONY: clean
 fclean: clean
 	/bin/rm -f $(NAME)
 
