@@ -6,7 +6,7 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:24:17 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/31 16:47:58 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/31 19:07:54 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_point		*ft_IDtetri(char *str)
 	int		j;
 	int		inity;
 	int		initx;
-	
+
 	i = 0;
 	j = 0;
 	if (!(tab = (t_point*)malloc(sizeof(t_point) * 5)))
@@ -440,6 +440,7 @@ int		main(int argc, char **argv)
 		else
 			linenb++;
 	}
+	free(line);
 	if (linenb != 0)
 	{
 		ft_putstr("error\n");

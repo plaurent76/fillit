@@ -6,7 +6,7 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 11:16:28 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/31 16:46:57 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/31 17:59:36 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,31 @@ int					get_next_line(int const fd, char **line)
 	*line = ft_strsub(str[fd], 0, ft_strtest(str[fd]));
 	if (ft_howcpy(str[fd]) == NULL)
 		return (0);
+	//free(buff);
+	//free(str);
 	return (1);
 }
 
+/*
 int		main(int argc, char **argv)
 {
 	int		fd;
-	int		fd2;
 	char	*line;
 
 	if (argc == 1)
 		fd = 0;
-	else if (argc == 3)
-	{
+	else if (argc == 2)
 		fd = open(argv[1], O_RDONLY);
-		fd2 = open(argv[2], O_RDONLY);
-	}
 	else
 		return (2);
 	while (get_next_line(fd, &line) == 1)
 	{
-		ft_putnbr(fd);
-		ft_putendl(line);
-		ft_putchar('a');
-		free(line);
-	}
-	while (get_next_line(fd2, &line) == 1)
-	{
 		ft_putendl(line);
 		free(line);
 	}
-	if (argc == 3)
+	free(line);
+	if (argc == 2)
 		close(fd);
 	return (0);
 }
+*/

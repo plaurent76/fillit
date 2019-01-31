@@ -6,13 +6,13 @@
 /*   By: plaurent <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 11:39:54 by plaurent          #+#    #+#             */
-/*   Updated: 2019/01/31 11:28:31 by plaurent         ###   ########.fr       */
+/*   Updated: 2019/01/31 17:47:23 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# define BUFF_SIZE 1
+# define BUFF_SIZE 100
 
 # include <fcntl.h>
 # include <stdlib.h>
