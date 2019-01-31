@@ -6,7 +6,7 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:24:17 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/29 14:29:48 by eviana           ###   ########.fr       */
+/*   Updated: 2019/01/31 16:47:58 by eviana           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		ft_check(char *str, int n)
 	{
 		if (ft_checknb(str) == 2)
 		{
-			ft_putstr("error\n"); // nb char KO
+			ft_putstr("error\n");
 			return (0);
 		}
 		if (ft_checktetri(str) == 2)
 		{
-			ft_putstr("error\n"); // tetri KO
+			ft_putstr("error\n");
 			return (0);
 		}
 	}
@@ -77,11 +77,9 @@ t_point		*ft_IDtetri(char *str)
 			{
 				tab[j].x = tab[j].x - initx;
 				j++;
-			}	
+			}
 		}
 	}
-	//tab[4].x = 10 * (tab[0].y + tab[1].y + tab[2].y + tab[3].y) + 
-	//	(tab[0].x + tab[1].x + tab[2].x + tab[3].x); // ex scotch // DEVENU ID TETRI
 	return (tab);
 }
 
@@ -125,7 +123,6 @@ t_tlist		*ft_newtetri(t_tlist *tetrilist, char *str, int tetrinb)
 	
 	// Maillage du nouveau maillon a la fin de la chaine
 	if (tetrilist == NULL)
-		// free tetrilist ?
 		return (tetri);
 	else
 	{
@@ -154,6 +151,13 @@ void	ft_printboard(char **board)
 		ft_putchar('\n');
 		i++;
 	}
+	i = 0;
+	while (board[i])
+	{
+		free(board[i]);
+		i++;
+	}
+	free(board);
 }
 
 // check si on ne depasse pas du board et qu'aucune piece n'occupe l'espace
@@ -306,12 +310,19 @@ char	**ft_tetriplace(t_tlist *tetrilist, int	tetrinb)
 {
 	char 	**board;
 	int		size;
+	int		i;
 
 	size = ft_nearsqrt(tetrinb * 4);
 	board = ft_createboard(size);
 	board = ft_backtrack(tetrilist, board, size);
 	while (!ft_checkplacetetri(board, tetrilist))
 	{
+		i = 0;
+		while (i < (size + 1))
+		{
+			free(board[i]);
+			i++;
+		}
 		free(board);
 		size++;
 		board = ft_createboard(size);
@@ -320,6 +331,7 @@ char	**ft_tetriplace(t_tlist *tetrilist, int	tetrinb)
 	return (board);
 }
 
+/*
 // Impression pour verif
 void	ft_print(t_tlist *tetrilist)
 {
@@ -355,6 +367,26 @@ void	ft_print(t_tlist *tetrilist)
 		}
 		ft_putchar('\n');
 		tetrilist = tetrilist->next;
+	}
+	// free(tab); // ADD FREE
+	// free(tetrilist); // ADD FREE
+}
+*/
+
+void	ft_dellist(t_tlist **alst)
+{
+	t_tlist *temp;
+
+	if (alst)
+	{
+		while (*alst)
+		{
+			temp = (*alst)->next;
+			//ft_lstdelone(alst, del);
+			free((*alst)->tab);
+			free(*alst);
+			*alst = temp;
+		}
 	}
 }
 
@@ -415,6 +447,7 @@ int		main(int argc, char **argv)
 	}
 	// ft_print(tetrilist); // TEST TEST TEST
 	ft_printboard(ft_tetriplace(tetrilist, tetrinb));
-	free(str);
+	ft_dellist(&tetrilist);
+	free(str); // ADD FREE
 	return (0);
 }
