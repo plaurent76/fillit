@@ -32,6 +32,19 @@ typedef struct 	s_tlist
 	struct s_tlist	*next;
 }				t_tlist;
 
+void			ft_dellist(t_tlist **alst);
+char			**ft_tetriplace(t_tlist *tetrilist, int tetrinb);
+char			**ft_createboard(int size);
+int			ft_nearsqrt(int nb);
+char			**ft_backtrack(t_tlist *tetri, char **board, int size);
+int			ft_checkplacetetri(char **board, t_tlist *tetri);
+int			ft_checkboard2(char **board, t_point *tab, int x, int y);
+int			ft_checkboard1(t_point *tab, int x, int y, int size);
+void			ft_printboard(char **board);
+t_tlist			*ft_createtri(t_point *tab, int tetrinb);
+t_point			*ft_IDtetri(char *str);
+int			ft_check(char *str, int n);
+t_tlist			*ft_newtetri(t_tlist *tetrilist, char *str, int tetri);
 int			get_next_line(const int fd, char **line);
 int			ft_checknb(char *str);
 int			ft_checktetri(char *str);

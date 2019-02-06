@@ -390,7 +390,7 @@ void	ft_dellist(t_tlist **alst)
 	}
 }
 
-int		main(int argc, char **argv)
+/*int		main(int argc, char **argv)
 {
 	int		fd;	
 	char	*line;
@@ -451,4 +451,4 @@ int		main(int argc, char **argv)
 	ft_dellist(&tetrilist);
 	free(str); // ADD FREE
 	return (0);
-}
+}*/
