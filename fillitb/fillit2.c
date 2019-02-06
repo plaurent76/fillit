@@ -6,13 +6,13 @@
 /*   By: eviana <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:24:17 by eviana            #+#    #+#             */
-/*   Updated: 2019/01/31 19:07:54 by eviana           ###   ########.fr       */
+/*   Updated: 2019/02/06 17:32:17 by plaurent         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		ft_check(char *str, int n)
+/*int		ft_check(char *str, int n)
 {
 	if (n == 1 && str[0] != '\0')
 	{
@@ -33,10 +33,10 @@ int		ft_check(char *str, int n)
 		}
 	}
 	return (1);
-}
+}*/
 
 // Conversion str to tab(x;y)
-t_point		*ft_IDtetri(char *str)
+/*t_point		*ft_IDtetri(char *str)
 {	
 	t_point	*tab;
 	int		i;
@@ -81,10 +81,10 @@ t_point		*ft_IDtetri(char *str)
 		}
 	}
 	return (tab);
-}
+}*/
 
 // Creation du tetri via tab(x;y) et son numero
-t_tlist	*ft_createtetri(t_point *tab, int tetrinb)
+/*t_tlist	*ft_createtetri(t_point *tab, int tetrinb)
 {
 	t_tlist *tetri;
 	
@@ -133,8 +133,8 @@ t_tlist		*ft_newtetri(t_tlist *tetrilist, char *str, int tetrinb)
 		return (tetrilist);
 	}
 }
-
-void	ft_printboard(char **board)
+*/
+/*void	ft_printboard(char **board)
 {
 	int i;
 	int j;
@@ -158,40 +158,30 @@ void	ft_printboard(char **board)
 		i++;
 	}
 	free(board);
-}
+}*/
 
 // check si on ne depasse pas du board et qu'aucune piece n'occupe l'espace
-int		ft_checkboard1(t_point *tab, int x, int y, int size)
+/*int		ft_checkboard1(t_point *tab, int x, int y, int size)
 {
 	if ((y + tab[0].y) < size && (x + tab[0].x) < size &&
 		(y + tab[1].y) < size && (x + tab[1].x) < size &&
 		(y + tab[2].y) < size && (x + tab[2].x) < size &&
 		(y + tab[3].y) < size && (x + tab[3].x) < size)
-	{
-		// ft_putstr("B : piece fit le board\n"); // TEST TEST TEST
 		return (1);
-	}
 	else
 		return (0);
 }
 
-// check que la place est libre sur le board
 int		ft_checkboard2(char **board, t_point *tab, int x, int y)
 {
 	if (board[y + tab[0].y][x + tab[0].x] == '.' &&
 			board[y + tab[1].y][x + tab[1].x] == '.' &&
 			board[y + tab[2].y][x + tab[2].x] == '.' &&
 			board[y + tab[3].y][x + tab[3].x] == '.')
-	{	
-		// ft_putstr("C : la place est libre\n"); // TEST TEST TEST
 		return (1);
-	}
 	else
 		return (0);
 }
-
-// check qu'on a jamais place la piece a cet endroit du board
-//int		ft_checkboard3(char ***board, )
 
 int		ft_checkplacetetri(char **board, t_tlist *tetri)
 {
@@ -227,21 +217,21 @@ char	**ft_backtrack(t_tlist *tetri, char **board, int size)
 	{
 		while (i <= ((size * size) - 3))
 		{
-			// ft_putstr("A : je tente de positionner\n"); // TEST TEST TEST
+			 ft_putstr("A : je tente de positionner\n");  TEST TEST TEST
 			y = i / size;
 			x = i % size;
 			if (ft_checkboard1(tab, x, y, size) == 1 &&
 					ft_checkboard2(board, tab, x, y) == 1)
 			{
-				// ft_putstr("D : je positionne \n"); // TEST TEST TEST
+				 ft_putstr("D : je positionne \n");  TEST TEST TEST
 				board[y + tab[0].y][x + tab[0].x] = tetri->name;
 				board[y + tab[1].y][x + tab[1].x] = tetri->name;
 				board[y + tab[2].y][x + tab[2].x] = tetri->name;
 				board[y + tab[3].y][x + tab[3].x] = tetri->name;
-				// ft_printboard(board); // TEST TEST TEST
+				 ft_printboard(board);  TEST TEST TEST
 				if (tetri->next)
 					board = ft_backtrack(tetri->next, board, size);
-				// ft_putstr("je ressors du backtracking\n"); // TEST TEST TEST
+				 ft_putstr("je ressors du backtracking\n");  TEST TEST TEST
 				break;
 			}
 			else
@@ -252,22 +242,22 @@ char	**ft_backtrack(t_tlist *tetri, char **board, int size)
 				break;
 		if (tetri->next != NULL && ft_checkplacetetri(board, tetri)) 
 		{	
-			// ft_putstr("je clean\n"); // TEST TEST TEST
+			 ft_putstr("je clean\n");  TEST TEST TEST
 			y = i / size;
 			x = i % size;
 			board[y + tab[0].y][x + tab[0].x] = '.';
 			board[y + tab[1].y][x + tab[1].x] = '.';
 			board[y + tab[2].y][x + tab[2].x] = '.';
 			board[y + tab[3].y][x + tab[3].x] = '.';
-			// ft_putstr("c'est clean\n"); // TEST TEST TEST
-			// ft_printboard(board); // TEST TEST TEST
+			 ft_putstr("c'est clean\n");  TEST TEST TEST
+			 ft_printboard(board);  TEST TEST TEST
 		}
 		i++;
 	}
 	return (board);
 }
-
-int		ft_nearsqrt(int nb)
+*/
+/*int		ft_nearsqrt(int nb)
 {
 	int i;
 
@@ -329,7 +319,7 @@ char	**ft_tetriplace(t_tlist *tetrilist, int	tetrinb)
 		board = ft_backtrack(tetrilist, board, size);
 	}
 	return (board);
-}
+}*/
 
 /*
 // Impression pour verif
